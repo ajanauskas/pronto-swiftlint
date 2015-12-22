@@ -7,7 +7,6 @@ module Pronto
       return [] unless patches
 
       offences = Swiftlint::Wrapper.new.lint
-      puts offences
 
       patches.select { |p| p.additions > 0 }
         .select { |p| swift_file?(p.new_file_full_path) }
@@ -20,7 +19,7 @@ module Pronto
 
     def inspect(patch, offences)
       messages = []
-      offences_in_file = offences[patch.new_file_full_path]
+      offences_in_file = offences[patch.new_file_full_path.to_s]
       return unless offences_in_file
 
       offences_in_file.each do |offence|
