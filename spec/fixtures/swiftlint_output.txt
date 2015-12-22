@@ -1,0 +1,4 @@
+Linting 'MyView.swift' (181/181)
+/Users/andrius/work/ios/TestApp/Views/MyView.swift:1:7: warning: Colon Violation: Colons should be next to the identifier when specifying a type. (colon)
+/Users/andrius/work/ios/TestApp/Views/MyView.swift:43: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)
+Done linting! Found 2 violations, 0 serious in 181 files.
