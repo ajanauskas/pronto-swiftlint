@@ -8,7 +8,7 @@ module Pronto
         stdout, stderr, _ = Open3.capture3(swiftlint_executable)
         puts "WARN: pronto-swiftlint: #{stderr}" if stderr && stderr.size > 0
         return {} if stdout.nil? || stdout == 0
-        OutputParser.new(stdout).parse
+        OutputParser.new.parse(stdout)
       end
 
       private

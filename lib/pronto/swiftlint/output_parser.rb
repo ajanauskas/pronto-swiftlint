@@ -24,25 +24,28 @@ module Pronto
         return if line_parts.size < 5
 
         file_path = line_parts[0]
-        line = line_parts[1].to_i
+        violation_line = line_parts[1].to_i
         column, level, violation = identify_line_parts(line_parts)
         message, rule = extract_message_and_rule(violation)
 
         {
           file: file_path,
-          line: line,
+          line: violation_line,
           column: column,
           level: level,
           message: message,
           rule: rule
         }
+      rescue => e
+        puts "pronto-swiftlint WARN: failed to parse line: #{line}; error: #{e}"
+        nil
       end
 
       def identify_line_parts(parts)
-        if parts.size > 5
-          [parts[2].to_i, parts[3].strip.to_sym, parts[5]]
+        if parts[2].to_i != 0
+          [parts[2].to_i, parts[3].strip.to_sym, parts[5..parts.size - 1].join]
         else
-          [nil, parts[2].strip.to_sym, parts[4]]
+          [nil, parts[2].strip.to_sym, parts[4..parts.size - 1].join]
         end
       end
 

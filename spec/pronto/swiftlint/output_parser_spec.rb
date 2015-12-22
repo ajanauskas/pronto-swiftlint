@@ -13,7 +13,7 @@ RSpec.describe Pronto::Swiftlint::OutputParser do
     end
 
     it 'parses output' do
-      expect(subject).to eq({
+      expect(subject).to eq(
         '/Users/andrius/work/ios/TestApp/Views/MyView.swift' => [
           {
             line: 1,
@@ -23,6 +23,13 @@ RSpec.describe Pronto::Swiftlint::OutputParser do
             rule: 'colon'
           },
           {
+            line: 5,
+            column: 9,
+            level: :error,
+            message: "Variable name should start with a lowercase character 'name'",
+            rule: 'variable_name'
+          },
+          {
             line: 43,
             column: nil,
             level: :warning,
@@ -30,7 +37,27 @@ RSpec.describe Pronto::Swiftlint::OutputParser do
             rule: 'trailing_whitespace'
           }
         ]
-      })
+      )
+    end
+
+    context 'trailing whitespace' do
+      let(:output) do
+        '/Users/andrius/work/ios/TestApp/MyView.swift:43: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)'
+      end
+
+      it 'parses output' do
+        expect(subject).to eq(
+          '/Users/andrius/work/ios/TestApp/MyView.swift' => [
+            {
+              line: 43,
+              column: nil,
+              level: :warning,
+              message: 'Lines should not have trailing whitespace',
+              rule: 'trailing_whitespace'
+            }
+          ]
+        )
+      end
     end
   end
 end
