@@ -8,7 +8,7 @@ module Pronto
           violations = JSON.parse(output)
         rescue => e
           puts "pronto-swiftlint ERROR: failed to parse output. Is formatter set to json? #{e}"
-          return []
+          return {}
         end
 
         result = {}
