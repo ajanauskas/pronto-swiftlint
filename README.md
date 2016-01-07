@@ -10,7 +10,7 @@ You can explicitly specify location of SwiftLint runner by passing `PRONTO_SWIFT
 
 `PRONTO_SWIFTLINT_PATH=/usr/very/hidden/bin/swiftlint pronto run --index`
 
-This runner requires `json` formatter to be set. You can do it by modifying `.swiftlint.yml` in directly pronto is run:
+This runner requires `json` formatter to be set. You can do it by modifying `.swiftlint.yml` in directory pronto is run:
 
 ```yaml
 disabled_rules: # rule identifiers to exclude from running
