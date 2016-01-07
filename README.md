@@ -1,4 +1,4 @@
-# Pronto::Tailor
+# Pronto::Swiftlint
 
 [Pronto](https://github.com/mmozuras/pronto) runner for [Swiftlint](https://github.com/realm/SwiftLint)
 
