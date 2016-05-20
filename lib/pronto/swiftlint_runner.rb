@@ -3,12 +3,12 @@ require 'pronto'
 
 module Pronto
   class SwiftlintRunner < Runner
-    def run(patches, _)
-      return [] unless patches
+    def run
+      return [] unless @patches
 
       offences = Swiftlint::Wrapper.new.lint
 
-      patches.select { |p| p.additions > 0 }
+      @patches.select { |p| p.additions > 0 }
         .select { |p| swift_file?(p.new_file_full_path) }
         .map { |p| inspect(p, offences) }
         .flatten
@@ -34,7 +34,7 @@ module Pronto
 
     def new_message(offence, line)
       path = line.patch.delta.new_file[:path]
-      Message.new(path, line, offence[:level], offence[:message])
+      Message.new(path, line, offence[:level], offence[:message], nil, self.class)
     end
 
     def swift_file?(path)
