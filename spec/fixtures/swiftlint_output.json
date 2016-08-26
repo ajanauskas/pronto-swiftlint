@@ -1,0 +1,20 @@
+[
+  {
+    "reason" : "Colons should be next to the identifier when specifying a type.",
+    "character" : 5,
+    "file" : "\/Users\/zw\/Desktop\/Test\/Test.swift",
+    "rule_id" : "colon",
+    "line" : 4,
+    "severity" : "Warning",
+    "type" : "Colon"
+  },
+  {
+    "reason" : "Force casts should be avoided.",
+    "character" : 32,
+    "file" : "\/Users\/zw\/Desktop\/Test\/Test.swift",
+    "rule_id" : "force_cast",
+    "line" : 3,
+    "severity" : "Error",
+    "type" : "Force Cast"
+  }
+]

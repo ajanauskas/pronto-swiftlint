@@ -5,7 +5,7 @@ module Pronto
   module Swiftlint
     class Wrapper
       def lint
-        stdout, stderr, _ = Open3.capture3(swiftlint_executable)
+        stdout, stderr, _ = Open3.capture3("#{swiftlint_executable} lint --reporter json")
         puts "WARN: pronto-swiftlint: #{stderr}" if stderr && stderr.size > 0
         return {} if stdout.nil? || stdout == 0
         OutputParser.new.parse(stdout)

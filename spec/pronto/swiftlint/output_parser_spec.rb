@@ -1,63 +1,37 @@
 require 'spec_helper'
-require 'pathname'
-require 'pronto/swiftlint/output_parser'
 
 RSpec.describe Pronto::Swiftlint::OutputParser do
   let(:parser) { described_class.new }
 
   describe '#parse' do
-    subject { parser.parse(output) }
 
     let(:output) do
-      File.read("#{Pathname.pwd}/spec/fixtures/swiftlint_output.txt")
+      File.read("#{Pathname.pwd}/spec/fixtures/swiftlint_output.json")
     end
+
+    subject { parser.parse(output) }
 
     it 'parses output' do
       expect(subject).to eq(
-        '/Users/andrius/work/ios/TestApp/Views/MyView.swift' => [
+        '/Users/zw/Desktop/Test/Test.swift' => [
           {
-            line: 1,
-            column: 7,
+            file: '/Users/zw/Desktop/Test/Test.swift',
+            line: 4,
+            column: 5,
             level: :warning,
             message: 'Colons should be next to the identifier when specifying a type.',
             rule: 'colon'
           },
           {
-            line: 5,
-            column: 9,
+            file: '/Users/zw/Desktop/Test/Test.swift',
+            line: 3,
+            column: 32,
             level: :error,
-            message: "Variable name should start with a lowercase character 'name'",
-            rule: 'variable_name'
-          },
-          {
-            line: 43,
-            column: nil,
-            level: :warning,
-            message: 'Lines should not have trailing whitespace.',
-            rule: 'trailing_whitespace'
+            message: 'Force casts should be avoided.',
+            rule: 'force_cast'
           }
         ]
       )
-    end
-
-    context 'trailing whitespace' do
-      let(:output) do
-        '/Users/andrius/work/ios/TestApp/MyView.swift:43: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)'
-      end
-
-      it 'parses output' do
-        expect(subject).to eq(
-          '/Users/andrius/work/ios/TestApp/MyView.swift' => [
-            {
-              line: 43,
-              column: nil,
-              level: :warning,
-              message: 'Lines should not have trailing whitespace',
-              rule: 'trailing_whitespace'
-            }
-          ]
-        )
-      end
     end
   end
 end
