@@ -1,6 +1,7 @@
 require 'rspec'
 require 'rspec/its'
 require 'pronto/swiftlint'
+require 'fileutils'
 
 RSpec.shared_context 'test repo' do
   let(:git) { 'spec/fixtures/test.git/git' }
